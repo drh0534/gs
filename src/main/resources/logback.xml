@@ -1,0 +1,69 @@
+<configuration scan="true">
+    <appender name="EMAIL" class="ch.qos.logback.classic.net.SMTPAppender">
+        <smtpHost>smtp.gmail.com</smtpHost>
+        <smtpPort>465</smtpPort>
+        <SSL>true</SSL>
+        <username>homeatchina@gmail.com</username>
+        <password>dcb0d19db13d11c8b609666142bd45be</password>
+
+        <to>duronghong@gochinatv.com</to>
+        <!--<to>ANOTHER_EMAIL_DESTINATION</to> --><!-- additional destinations are possible -->
+        <from>homeatchina@gmail.com</from>
+        <subject>[device-tv]-{Exception}: %logger{20} - %m</subject>
+        <!--<layout class="ch.qos.logback.classic.PatternLayout">-->
+            <!--<pattern>%date %-5level %logger{35} - %message%n</pattern>-->
+        <!--</layout>-->
+        <layout class="ch.qos.logback.classic.html.HTMLLayout"/>
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator class="ch.qos.logback.classic.boolex.JaninoEventEvaluator">
+                <expression>
+                    <!-- & encoded as &amp; -->
+                    if(level > WARN &amp;&amp; null != throwable) {
+                        return true;
+                    }
+                    return false;
+                </expression>
+            </evaluator>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/device-tv.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>device-tv.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!--<appender name="AIRBRAKE" class="airbrake.AirbrakeAppender">-->
+    <!--<param name="api_key" value="3d3cc8749439b5878038d22d079ce0bf" />-->
+    <!--&lt;!&ndash; <param name="env" value="test"/> &ndash;&gt; -->
+    <!--&lt;!&ndash; <param name="env" value="development"/> &ndash;&gt; -->
+    <!--<param name="env" value="production" />-->
+    <!--<param name="enabled" value="true" />-->
+    <!--<param name="url" value="http://api.airbrake.io/notifier_api/v2/notices"/>-->
+    <!--</appender>-->
+
+    <root level="INFO">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT"/>
+        <!--<appender-ref ref="AIRBRAKE" />-->
+        <appender-ref ref="EMAIL"/>
+    </root>
+
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.apache" level="INFO"/>
+
+</configuration>
