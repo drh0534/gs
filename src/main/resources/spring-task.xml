@@ -8,10 +8,10 @@
     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd 
 	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd">
 	
-	<task:scheduled-tasks>
+<!-- 	<task:scheduled-tasks> -->
 	   <!--<task:scheduled ref="flushRedisTask" method="flushCache" cron="${task.flushCache.cron}" />  &lt;!&ndash; 5分钟触发执行  &ndash;&gt;-->
         <!--<task:scheduled ref="requestShareKeyTask" method="saveCdnKeyToRedis" cron="${task.saveCdnKeyToRedis.cron}"/>&lt;!&ndash; 每十分钟请求一次key值 &ndash;&gt;-->
 <!--         <task:scheduled ref="cacheCpHomeMenuTask" method="loadCpHomeMenuToRedisTask" cron="${task.cacheCpHomeMenuData}"/> -->
-    </task:scheduled-tasks>
+<!--     </task:scheduled-tasks> -->
 
 </beans>
