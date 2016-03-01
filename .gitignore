@@ -17,3 +17,5 @@
 /device-tv.iml
 /logs
 /target/
+/.externalToolBuilders
+/gs.iml
