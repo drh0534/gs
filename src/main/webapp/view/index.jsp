@@ -1,3 +1,5 @@
+<%@ taglib prefix="mvc" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: drh0534
@@ -11,6 +13,7 @@
     <title>Title</title>
 </head>
 <body>
+
 
 </body>
 </html>

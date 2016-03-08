@@ -16,7 +16,9 @@ public class UserController {
 	
 	@RequestMapping(value="/one",method=RequestMethod.GET)
     @ResponseBody
-	public User test(){
+	public User test(
+
+    ){
 		User user = new User();
 		user.setEmail("aa@163.com");
 		user.setId(1);

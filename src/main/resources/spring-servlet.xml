@@ -23,12 +23,31 @@
 	<context:component-scan base-package="com.gs.pp" />
 	<context:component-scan base-package="com.gs.pp.framework" />
 
-	<mvc:annotation-driven />
+	<mvc:annotation-driven validator="validator" />
 
 	<mvc:resources location="/js/" mapping="/js/**" />
 	<mvc:resources location="/images/" mapping="/images/**" />
 	<!--<mvc:resources location="/css/" mapping="/css/**"/> -->
 	<!--<mvc:resources location="/download/" mapping="/download/**"/> -->
+
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>message</value>
+                <!--<value>classpath:org/hibernate/validator/ValidationMessages</value>-->
+                <value>org.hibernate.validator.ValidationMessages</value>
+            </list>
+        </property>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="cacheSeconds" value="60"/>
+    </bean>
+	
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
